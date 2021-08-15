@@ -64,8 +64,8 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
             context.startActivity(intent);
 
-            Snackbar.make(v, nameListGolpes[position], Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(v, nameListGolpes[position], Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();*/
         });
     }
 

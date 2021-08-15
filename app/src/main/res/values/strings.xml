@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kempo Karate Do</string>
     <string name="app_inicio">Kempo Karatê Do</string>
-    <string name="btn_golpes">Golpes</string>
+    <string name="btn_defesas">Defesas</string>
     <string name="btn_kata">Kata</string>
     <string name="slogan">slogan</string>
     <string name="description">Description</string>

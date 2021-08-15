@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -21,12 +16,12 @@ public class ActivityGolpes extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
-    String[] nameListGolpes = {
+    String[] nameListDefesas = {
             "Gedan Barai", "Jodan Age Uke", "Jodan Juji Uke",
             "Shuto Uke", "Soto Uke", "Uchi Uke"
     };
-    String[] descriptionListGolpes = {
-            "Varrer \"embaixo\"", "Defesa Ascendente", "Desefesa cruzada",
+    String[] descriptionListDefesas = {
+            "Varrer \"embaixo\"", "Defesa Ascendente", "Defesa cruzada",
             "Defesa com a faca da mão", "Defesa circular", "Puxar o punhal"
     };
     int[] imageListGolpes = {
@@ -44,8 +39,8 @@ public class ActivityGolpes extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        ProgramAdapter programAdapter = new ProgramAdapter(this, nameListGolpes,
-                descriptionListGolpes, imageListGolpes);
+        ProgramAdapter programAdapter = new ProgramAdapter(this, nameListDefesas,
+                descriptionListDefesas, imageListGolpes);
         recyclerView.setAdapter(programAdapter);
 
         Intent intent = new Intent(this, ActivityExecucaoGolpes.class);
