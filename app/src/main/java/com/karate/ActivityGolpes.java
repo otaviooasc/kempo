@@ -1,53 +1,89 @@
 package com.karate;
 
+import android.os.Build;
+import android.os.Bundle;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
+import com.karate.model.DefesasEntity;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityGolpes extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
-    String[] nameListDefesas = {
-            "Gedan Barai", "Jodan Age Uke", "Jodan Juji Uke",
-            "Shuto Uke", "Soto Uke", "Uchi Uke"
-    };
-    String[] descriptionListDefesas = {
-            "Varrer \"embaixo\"", "Defesa Ascendente", "Defesa cruzada",
-            "Defesa com a faca da mão", "Defesa circular", "Puxar o punhal"
-    };
-    int[] imageListGolpes = {
-            R.drawable.gedan_barai, R.drawable.jodan_age_uke,
-            R.drawable.juji_uke, R.drawable.shuto_uke, R.drawable.soto_uke, R.drawable.uchi_uke
-    };
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_golpes);
         recyclerView = findViewById(R.id.activityListGolpes);
         recyclerView.setHasFixedSize(true);
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        ProgramAdapter programAdapter = new ProgramAdapter(this, nameListDefesas,
-                descriptionListDefesas, imageListGolpes);
+        ProgramAdapter programAdapter = new ProgramAdapter(this, listaDefesas());
         recyclerView.setAdapter(programAdapter);
+    }
 
-        Intent intent = new Intent(this, ActivityExecucaoGolpes.class);
+    public List<DefesasEntity> listaDefesas() {
+        List<DefesasEntity> list = new ArrayList<>();
+        list.add(new DefesasEntity("Gedan Barai", "Varrer \"embaixo\"", R.drawable.gedan_barai,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
 
-        if(!Objects.isNull(programAdapter.golpes)){
-            intent.putExtra("golpes", programAdapter.golpes);
-            startActivity(intent);
-        }
+        list.add(new DefesasEntity("Jodan Age Uke", "Defesa Ascendente", R.drawable.jodan_age_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+
+        list.add(new DefesasEntity("Jodan Juji Uke", "Defesa cruzada", R.drawable.juji_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+
+        list.add(new DefesasEntity("Shuto Uke", "Defesa com a faca da mão", R.drawable.shuto_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+
+        list.add(new DefesasEntity("Soto Uke", "Defesa circular", R.drawable.soto_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+
+        list.add(new DefesasEntity("Uchi Uke", "Puxar o punhal", R.drawable.uchi_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+
+        list.add(new DefesasEntity("Teisho Uke", "Defesa com a palma da mão", R.drawable.teisho_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+
+        list.add(new DefesasEntity("Haishu Uke", "Defesa com as costas da mão", R.drawable.haishu_uke,
+                "A própria defesa pode ser considerada um ataque dissuadindo o atacante. " +
+                        "Paradas fundamentais: Gedan Barai - Bloqueio de cima para baixo. " +
+                        "Geralmente para defender pontapés ou socos a altura do cinto, " +
+                        "todavia funciona para algumas situações à altura do peito.", R.drawable.gedan_barau_execucao));
+        return list;
     }
 }

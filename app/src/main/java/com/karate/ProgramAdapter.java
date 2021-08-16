@@ -1,9 +1,9 @@
 package com.karate;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.karate.model.GolpesEntity;
+import com.karate.model.DefesasEntity;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {
 
     Context context;
-    String[] nameListGolpes;
-    String[] descriptionListGolpes;
-    int[] images;
-    GolpesEntity golpes;
+    List<DefesasEntity> listDefesas;
+    DefesasEntity golpes;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView rowName;
@@ -37,11 +39,13 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         }
     }
 
-    public ProgramAdapter(Context context, String[] nameListGolpes, String[] descriptionListGolpes, int[] images) {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ProgramAdapter(Context context, List<DefesasEntity> listDefesas) {
+        List<DefesasEntity> list = listDefesas;
+        Collections.sort(list, Comparator.comparing(DefesasEntity::getNameHit));
+
         this.context = context;
-        this.nameListGolpes = nameListGolpes;
-        this.descriptionListGolpes = descriptionListGolpes;
-        this.images = images;
+        this.listDefesas = list;
     }
 
     @NonNull
@@ -54,23 +58,23 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.rowName.setText(nameListGolpes[position]);
-        holder.rowDescription.setText(descriptionListGolpes[position]);
-        holder.rowImage.setImageResource(images[position]);
+        DefesasEntity defesasEntity = listDefesas.get(position);
+        holder.rowName.setText(defesasEntity.getNameHit());
+        holder.rowDescription.setText(defesasEntity.getDescriptionHit());
+        holder.rowImage.setImageResource(defesasEntity.getImageCoup());
 
         holder.itemView.setOnClickListener(v -> {
-            this.golpes = new GolpesEntity(nameListGolpes[position], descriptionListGolpes[position], images[position]);
+            this.golpes = new DefesasEntity(defesasEntity.getNameHit(), defesasEntity.getDescriptionHit(), defesasEntity.getImageCoup(),
+                    defesasEntity.getTechnicasDetails(), defesasEntity.getExecutionCoup());
             Intent intent = new Intent(v.getContext(), ActivityExecucaoGolpes.class);
+            intent.putExtra("golpes", golpes);
 
             context.startActivity(intent);
-
-            /*Snackbar.make(v, nameListGolpes[position], Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();*/
         });
     }
 
     @Override
     public int getItemCount() {
-        return nameListGolpes.length;
+        return listDefesas.size();
     }
 }
